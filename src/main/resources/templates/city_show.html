@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>City</title>
+</head>
+<body>
+<h2>City</h2>
+ID: <span th:inline="text"> [[${city.id}]]</span><br/>
+Name: <span th:inline="text"> [[${city.name}]]</span><br/>
+Country Code: <span th:inline="text"> [[${city.countryCode}]]</span><br/>
+Country Name: <span th:inline="text"> [[${city.countryName}]]</span><br/>
+District: <span th:inline="text"> [[${city.district}]]</span><br/>
+Population: <span th:inline="text"> [[${city.population}]]</span><br/>
+Local Weather: <span th:inline="text"> [[${city.temp}]]</span> Degrees F<br/>
+LocalTime: <span th:inline="text"> [[${city.time}]]</span><br/>
+</body>
+</html>
