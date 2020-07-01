@@ -33,7 +33,6 @@ public class WeatherService {
                 apiKey,
             JsonNode.class);
     JsonNode json = response.getBody();   // 2
-    System.out.println(json);
     log.info("Status code from weather server:" +
         response.getStatusCodeValue());
     double temp = json.get("main").get("temp").asDouble();

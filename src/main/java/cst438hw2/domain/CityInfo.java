@@ -1,5 +1,7 @@
 package cst438hw2.domain;
 
+import java.util.Objects;
+
 public class CityInfo {
 
   long id;
@@ -20,6 +22,18 @@ public class CityInfo {
     this.population = city.getPopulation();
     this.temp = tempAndTime.getFormattedTemp();
     this.time = tempAndTime.getFormattedTime();
+  }
+
+  public CityInfo(long id, String name, String countryCode, String countryName,
+      String district, int population, double temp, String time) {
+    this.id = id;
+    this.name = name;
+    this.countryCode = countryCode;
+    this.countryName = countryName;
+    this.district = district;
+    this.population = population;
+    this.temp = temp;
+    this.time = time;
   }
 
   public long getId() {
@@ -98,5 +112,24 @@ public class CityInfo {
         ", temp=" + temp +
         ", time='" + time + '\'' +
         '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    CityInfo cityInfo = (CityInfo) o;
+    return id == cityInfo.id &&
+        population == cityInfo.population &&
+        Double.compare(cityInfo.temp, temp) == 0 &&
+        Objects.equals(name, cityInfo.name) &&
+        Objects.equals(countryCode, cityInfo.countryCode) &&
+        Objects.equals(countryName, cityInfo.countryName) &&
+        Objects.equals(district, cityInfo.district) &&
+        Objects.equals(time, cityInfo.time);
   }
 }

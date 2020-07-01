@@ -1,5 +1,6 @@
 package cst438hw2.domain;
 
+import java.util.Objects;
 import javax.persistence.*;
 
 @Entity
@@ -74,5 +75,21 @@ public class City {
         ", population=" + population +
         ", country=" + country +
         '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    City city = (City) o;
+    return id == city.id &&
+        population == city.population &&
+        Objects.equals(name, city.name) &&
+        Objects.equals(district, city.district) &&
+        Objects.equals(country, city.country);
   }
 }

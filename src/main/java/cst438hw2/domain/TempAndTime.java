@@ -37,6 +37,7 @@ public class TempAndTime {
   }
 
   public String getFormattedTime() {
+    System.out.println(time);
     SimpleDateFormat formatter = new SimpleDateFormat("hh:mm a");
     Calendar calendar = Calendar.getInstance();
     calendar.setTimeInMillis(time * 1000);
