@@ -15,9 +15,6 @@ public class CityRestController {
   @Autowired
   private CityService cityService;
 
-  @Autowired
-  private WeatherService weatherService;
-
   @GetMapping("/api/cities/{city}")
   public ResponseEntity<CityInfo> getWeather(@PathVariable("city") String cityName) {
     CityInfo cityInfo = cityService.getCityInfo(cityName);

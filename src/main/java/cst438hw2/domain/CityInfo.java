@@ -13,6 +13,8 @@ public class CityInfo {
   double temp;
   String time;
 
+  public CityInfo() {};
+
   public CityInfo(City city, TempAndTime tempAndTime) {
     this.id = city.getId();
     this.name = city.getName();

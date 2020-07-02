@@ -1,4 +1,4 @@
-package cst438hw2;
+package cst438hw2.controller;
 
 import cst438hw2.domain.City;
 import cst438hw2.domain.CityInfo;
@@ -14,19 +14,10 @@ import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.assertj.core.api.Assertions.assertThat;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentMatchers;
-import org.mockito.MockitoAnnotations;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 @SpringBootTest
 public class CityServiceTest {
@@ -39,9 +30,6 @@ public class CityServiceTest {
 
   @Autowired
   private CityService cityService;
-
-  @MockBean
-  private CountryRepository countryRepository;
 
   @Test
   public void testCityFound() throws Exception {
@@ -112,7 +100,7 @@ public class CityServiceTest {
     CityInfo cityResult = cityService.getCityInfo("Los Angeles");
     CityInfo expectedResult = new CityInfo(1, "Los Angeles", "USA", "United States", "DistrictTest",
         123456, 98.2, "06:13 PM");
- 
+
     // Assertions
     assertThat(cityResult).isEqualTo(expectedResult);
   }
