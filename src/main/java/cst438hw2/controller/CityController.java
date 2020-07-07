@@ -18,7 +18,6 @@ public class CityController {
   public String getCityInfo(@PathVariable("city") String cityName,
       Model model) {
     CityInfo city = cityService.getCityInfo(cityName);
-    System.out.println(city);
     if(city == null) {
       return "city_not_found";
     } else {

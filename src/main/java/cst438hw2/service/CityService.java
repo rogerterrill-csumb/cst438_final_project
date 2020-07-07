@@ -10,8 +10,6 @@ public class CityService {
   @Autowired
   private CityRepository cityRepository;
   @Autowired
-  private CountryRepository countryRepository;
-  @Autowired
   private WeatherService weatherService;
 
   public CityInfo getCityInfo(String cityName) {
