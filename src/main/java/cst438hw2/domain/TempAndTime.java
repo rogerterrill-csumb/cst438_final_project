@@ -3,14 +3,21 @@ package cst438hw2.domain;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class TempAndTime {
 
-  public double temp;
-  public long time;
-  public int timezone;
+  private double temp;
+  private long time;
+  private int timezone;
 
   public TempAndTime(double temp, long time, int timezone) {
     this.temp = temp;
@@ -37,10 +44,12 @@ public class TempAndTime {
   }
 
   public String getFormattedTime() {
-    SimpleDateFormat formatter = new SimpleDateFormat("hh:mm a");
-    Calendar calendar = Calendar.getInstance();
-    calendar.setTimeInMillis(time * 1000);
-    return formatter.format(calendar.getTime());
+    Instant instant = Instant.ofEpochSecond(time);
+    ZoneOffset offset = ZoneOffset.ofTotalSeconds(timezone);
+    OffsetDateTime offsetDate = instant.atOffset(offset);
+    String timeFormat = "hh:mm a";
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern(timeFormat);
+    return offsetDate.format(dtf);
   }
 
   public void setTime(long time) {
