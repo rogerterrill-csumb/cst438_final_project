@@ -16,7 +16,6 @@ public class CityService {
 
   public CityInfo getCityInfo(String cityName) {
     List<City> c = cityRepository.findByName(cityName);
-    System.out.println(c);
     if(c.size() == 0){
       return null;
     }
