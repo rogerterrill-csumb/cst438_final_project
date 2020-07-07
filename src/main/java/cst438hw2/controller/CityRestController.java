@@ -21,11 +21,8 @@ public class CityRestController {
   @GetMapping("/api/cities/{city}")
   public ResponseEntity<CityInfo> getWeather(@PathVariable("city") String cityName) {
     CityInfo cityInfo = cityService.getCityInfo(cityName);
-    if (cityInfo == null) {
-      return new ResponseEntity<CityInfo>(HttpStatus.NOT_FOUND);
-    } else {
-      return new ResponseEntity<CityInfo>(cityInfo, HttpStatus.OK);
-    }
+    return cityInfo == null?new ResponseEntity<CityInfo>(HttpStatus.NOT_FOUND):
+        new ResponseEntity<CityInfo>(cityInfo, HttpStatus.OK);
   }
 }
 
