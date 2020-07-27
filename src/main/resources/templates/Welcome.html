@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Reservations</title>
+</head>
+<body>
+<h2>Welcome to the Reservation Website!</h2>
+<p>To start, click next</p>
+
+
+	<form method="GET" th:action="@{/reservations/newReservation}">	
+		<input type="Submit" text="Next">
+	</form>
+
+</body>
+</html>
