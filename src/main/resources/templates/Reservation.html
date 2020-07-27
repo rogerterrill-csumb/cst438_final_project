@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Reservations</title>
+</head>
+<body>
+<h2>Create a Reservation</h2>
+<p>Please enter your First Name, Last Name and Email.</p>
+
+	<form method="POST" th:action="@{/cities/reservation}">
+		<label for="firstName">First Name</label>
+		<input type="text" id="firstName" name="firstName"/><br>
+		<label for="lastName">Last Name</label>
+		<input type="text" id="lastName" name="lastName"/><br>
+		<label for="email">Email</label>
+		<input type="text" id="email" name="email"/><br>
+		<input type="submit">
+	</form>
+</body>
+</html>
