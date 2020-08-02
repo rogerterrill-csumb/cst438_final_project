@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Spring Boot Validation Login Form Example</title>
+<link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="style.css" />
+</head>
+
+
+<body>
+    <div class="login-form">
+        <form action="#" method="post" th:action="@{/login}" th:object="${loginUser}">
+            <h2 class="text-center">Sign in</h2>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock"></i></span> <input
+                        type="text" class="form-control" th:field="*{fname}"
+                        placeholder="First Name" />
+
+                </div>
+                <span class="red" th:if="${#fields.hasErrors('fname')}"
+                    th:errors="*{fname}"></span>
+            </div>
+
+            
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock"></i></span> 
+                        <input type="text" class="form-control" th:field="*{lname}"
+                        placeholder="Last Name" />
+
+                </div>
+                <span class="red" th:if="${#fields.hasErrors('lname')}"
+                    th:errors="*{lname}"></span>
+            </div>
+            
+                      
+            
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock"></i></span> <input
+                        type="text" class="form-control" th:field="*{email}"
+                        placeholder="Email" />
+
+                </div>
+                <span class="red" th:if="${#fields.hasErrors('email')}"
+                    th:errors="*{email}"></span>
+            </div>
+            
+            
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary login-btn btn-block">Sign
+                    in</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

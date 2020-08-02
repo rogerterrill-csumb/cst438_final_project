@@ -26,7 +26,7 @@ public class FlightService {
 	public Flight flightInfo(String firstName, String lastName, String email) {
 		ResponseEntity<JsonNode> response = 
               restTemplate.getForEntity(
-				flightUrl + "?firstName=" + firstName + "&lastName=" + lastName
+				flightUrl + "?fName=" + firstName + "&lastName=" + lastName
                    +"&email=" + email,
 				JsonNode.class);
 		JsonNode json = response.getBody();    // 2
