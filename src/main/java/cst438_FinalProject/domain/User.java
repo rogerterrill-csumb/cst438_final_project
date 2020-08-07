@@ -1,15 +1,25 @@
 package cst438_FinalProject.domain;
 
 import java.util.Objects;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+
+
+import cst438_FinalProject.domain.*;
 
 @Entity
 @Table(name="user")
 public class User {
+	
   @Id
-  private long id;
+  private int id;
+  
   private String fname;
   private String lname;
   private String email;
@@ -17,9 +27,9 @@ public class User {
   private long flightid;
   private long hotelid;
 
-  public User() {};
+  public User() { }
 
-  public User(long id, String fname, String lname, String email, long carid, long flightid,
+  public User(int id, String fname, String lname, String email, long carid, long flightid,
       long hotelid) {
     this.id = id;
     this.fname = fname;
@@ -29,12 +39,23 @@ public class User {
     this.flightid = flightid;
     this.hotelid = hotelid;
   }
+  
+  // Constructor for using loginUser to create a User
+  public User(LoginUser loginUser) {
+	  this.fname = loginUser.getFname();
+	  this.lname = loginUser.getLname();
+	  this.email = loginUser.getEmail();
+	  //Set some default value for carid, hotelid, flightid
+	  this.carid = 0;
+	  this.flightid = 0;
+	  this.hotelid = 0;
+  }
 
-  public long getId() {
+  public int getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(int id) {
     this.id = id;
   }
 
