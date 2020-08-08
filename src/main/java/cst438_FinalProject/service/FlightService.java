@@ -17,7 +17,7 @@ public class FlightService {
 	
 	private String flightUrl;
 	
-	public FlightService( @Value("${flight.url}") final String flightUrl) {
+	public FlightService( @Value("${FLIGHT.URL}") final String flightUrl) {
 		this.restTemplate = new RestTemplate();
 		this.flightUrl = flightUrl;
 	}

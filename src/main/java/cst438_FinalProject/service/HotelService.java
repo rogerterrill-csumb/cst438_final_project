@@ -17,7 +17,7 @@ public class HotelService {
 	
 	private String hotelUrl;
 	
-	public HotelService( @Value("${hotel.url}") final String hotelUrl) {
+	public HotelService( @Value("${HOTEL.URL}") final String hotelUrl) {
 		this.restTemplate = new RestTemplate();
 		this.hotelUrl = hotelUrl;
 	}
