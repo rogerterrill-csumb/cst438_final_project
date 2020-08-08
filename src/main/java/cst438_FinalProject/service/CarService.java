@@ -18,7 +18,7 @@ public class CarService {
 	
 	private String carUrl;
 	
-	public CarService( @Value("/carService") final String carUrl) {
+	public CarService( @Value("${car.url}") final String carUrl) {
 		this.restTemplate = new RestTemplate();
 		this.carUrl = carUrl;
 	}
