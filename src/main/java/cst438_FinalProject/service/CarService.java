@@ -25,11 +25,11 @@ public class CarService {
 	
 	private RestTemplate restTemplate;
 	
-	private String carUrl;
+	private String newCarReservationUrl;
 	
 	public CarService( @Value("${car.url}") final String carUrl) {
 		this.restTemplate = new RestTemplate();
-		this.carUrl = carUrl;
+		this.newCarReservationUrl = carUrl + "/api/reservation/new";
 	}
 	
 
@@ -43,7 +43,7 @@ public class CarService {
 			
 			HttpEntity<Map<String,Object>> entity = new HttpEntity<>(map,headers);
 			
-			ResponseEntity<String> response = restTemplate.postForEntity(this.carUrl, entity, String.class);
+			ResponseEntity<String> response = restTemplate.postForEntity(this.newCarReservationUrl, entity, String.class);
 			
 			// check response
 			if (response.getStatusCode() == HttpStatus.OK) {
