@@ -39,6 +39,8 @@ public class UserLoginController {
 		redirectAttrs.addFlashAttribute("loginUser", loginUser);
 		
 		return "redirect:welcome";
-			
 	}
+	
+	
+	
 }

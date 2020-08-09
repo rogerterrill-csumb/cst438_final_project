@@ -1,60 +1,43 @@
 package cst438_FinalProject.domain;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Car {
 
-
-	
-	  @Id
-	  private long id;
-	  private String fname;
-	  private String lname;
 	  private String email;
 	  private String pickupLocation;
+	  
+
 	  private String pickupDate;
 	  private String returnLocation;
+
 	  private String returnDate;
-	  private String type;
+	  private String carType;
 	  
 	public Car () {}  
 	  
-	public Car(long id, String fname, String lname, String email, String pickupLocation, String pickupDate,
-			String returnLocation, String returnDate, String type) {
-		super();
-		this.id = id;
-		this.fname = fname;
-		this.lname = lname;
+	public Car(String email, String pickupLocation, String pickupDate,
+			String returnLocation, String returnDate, String carType) {
 		this.email = email;
 		this.pickupLocation = pickupLocation;
-		this.pickupDate = pickupDate;
+		this.pickupDate = changeDateFormat(pickupDate);
 		this.returnLocation = returnLocation;
-		this.returnDate = returnDate;
-		this.type = type;
+		this.returnDate = changeDateFormat(returnDate);
+		this.carType = carType;
 	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getFname() {
-		return fname;
-	}
-
-	public void setFname(String fname) {
-		this.fname = fname;
-	}
-
-	public String getLname() {
-		return lname;
-	}
-
-	public void setLname(String lname) {
-		this.lname = lname;
+	
+	public String changeDateFormat(String inputDate) {
+        String year =  inputDate.substring(0,4);
+		String month = inputDate.substring(5,7);
+        String day = inputDate.substring(8,10);
+        
+		
+		return month + "/" + day + "/" + year;
 	}
 
 	public String getEmail() {
@@ -78,7 +61,7 @@ public class Car {
 	}
 
 	public void setPickupDate(String pickupDate) {
-		this.pickupDate = pickupDate;
+		this.pickupDate = changeDateFormat(pickupDate);
 	}
 
 	public String getReturnLocation() {
@@ -94,17 +77,24 @@ public class Car {
 	}
 
 	public void setReturnDate(String returnDate) {
-		this.returnDate = returnDate;
+		this.returnDate = changeDateFormat(returnDate);
 	}
 
-	public String getType() {
-		return type;
+	public String getCarType() {
+		return carType;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setCarType(String carType) {
+		this.carType = carType;
 	}
-	  
+
+	@Override
+	public String toString() {
+		return "Car [email=" + email + ", pickupLocation=" + pickupLocation + ", pickupDate=" + pickupDate
+				+ ", returnLocation=" + returnLocation + ", returnDate=" + returnDate + ", carType=" + carType + "]";
+	}
+
+
 	  
 	  
 }

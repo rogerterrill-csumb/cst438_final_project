@@ -1,12 +1,21 @@
 package cst438_FinalProject.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import com.fasterxml.jackson.databind.JsonNode;
+
+
 import cst438_FinalProject.domain.*;
 
 
@@ -23,20 +32,28 @@ public class CarService {
 		this.carUrl = carUrl;
 	}
 	
-	// Change to Car Class Object
-	public Car carInfo(String firstName, String lastName, String email) {
-		ResponseEntity<JsonNode> response = 
-              restTemplate.getForEntity(
-				carUrl + "?firstName=" + firstName + "&lastName=" + lastName
-                   +"&email=" + email,
-				JsonNode.class);
-		JsonNode json = response.getBody();    // 2
+
+	// For Sending JSON as a Body.
+	public boolean newCarReservation(Car car) {
+		ObjectMapper oMapper = new ObjectMapper();
+		Map<String,Object> map = oMapper.convertValue(car, Map.class);
 		
-		log.info("Status code from weather server:" +
-                  response.getStatusCodeValue());
-		
-		//Parse out the elements from the JSON object
-		
-		return new Car(); // insert the elements from Car and return the object.
+			var headers = new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_JSON);
+			
+			HttpEntity<Map<String,Object>> entity = new HttpEntity<>(map,headers);
+			
+			ResponseEntity<String> response = restTemplate.postForEntity(this.carUrl, entity, String.class);
+			
+			// check response
+			if (response.getStatusCode() == HttpStatus.OK) {
+			    System.out.println("Request Successful");
+			    System.out.println(response.getBody());
+			    return true;
+			} else {
+			    System.out.println("Request Failed");
+			    System.out.println(response.getStatusCode());
+			    return false;
+			}
 	}
 }
