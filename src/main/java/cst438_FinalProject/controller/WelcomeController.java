@@ -21,7 +21,7 @@ public class WelcomeController {
 	@Autowired
 	CarService carService;
 	
-	@GetMapping(value="/")
+	@GetMapping(value="/welcome")
 	public String welcome(
 			@ModelAttribute("loginUser") LoginUser loginUser,
 			Model model) {
@@ -46,8 +46,6 @@ public class WelcomeController {
 		return "welcome";
 	}
 
-
-	
 	@PostMapping(value="/new/car")
 	public String createCarReservation(
 			@ModelAttribute("car") Car car,

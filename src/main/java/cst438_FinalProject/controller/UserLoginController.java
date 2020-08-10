@@ -16,7 +16,7 @@ import cst438_FinalProject.domain.*;
 public class UserLoginController {
 
 	
-	@GetMapping(value="/login")
+	@GetMapping(value="/")
 	public String welcome(Model model) {
 		
 		LoginUser loginUser = new LoginUser();
