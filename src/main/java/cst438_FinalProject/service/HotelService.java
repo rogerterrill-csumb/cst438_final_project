@@ -49,7 +49,7 @@ public class HotelService {
 
       JsonNode json = response.getBody();
 
-      hotelRepository.save(new Hotel("name", "in", "out", 12, 12));
+//      hotelRepository.save(new Hotel("name", "in", "out", 12, 12));
 
       return "done";
   }

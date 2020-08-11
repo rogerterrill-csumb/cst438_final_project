@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import cst438_FinalProject.domain.*;
 import cst438_FinalProject.service.*;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class WelcomeController {
@@ -100,6 +101,14 @@ public class WelcomeController {
 
 		System.out.println(user.getEmail());
 		System.out.println(hotelService.getAllHotelReservationsByEmail(user.getEmail()));
+
+		return "welcome";
+	}
+
+	@PostMapping(value="/hotel/cancel")
+	public String deleteHotelReservation(@RequestParam("id") int id, Model model) {
+
+		hotelService.cancelReservationByReservationId(id);
 
 		return "welcome";
 	}
