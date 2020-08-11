@@ -13,9 +13,7 @@ public class UserService {
 	
 	@Autowired
 	private UserRepository userRepository;
-	
 
-	
 	private boolean existingUser;
 	
 	public User getUser(LoginUser loginUser) {
@@ -23,7 +21,7 @@ public class UserService {
 		String email = loginUser.getEmail();
 		List<User> users = userRepository.findByEmail(email);
 		//User already exists
-		if ( users.size()>0) {
+		if (users.size()>0) {
 			user = users.get(0);
 //			System.out.println("User already Exists");
 			existingUser = true;

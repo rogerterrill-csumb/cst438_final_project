@@ -1,5 +1,6 @@
 package cst438_FinalProject.controller;
 
+import cst438_FinalProject.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,13 +21,17 @@ public class WelcomeController {
 	
 	@Autowired
 	CarService carService;
+
+	@Autowired
+	HotelService hotelService;
+
+	@Autowired
+	UserRepository userRepository;
 	
 	@GetMapping(value="/welcome")
 	public String welcome(
 			@ModelAttribute("loginUser") LoginUser loginUser,
 			Model model) {
-		
-		
 		
 		//Checking if the Login User was passed Correctly
 		System.out.println(loginUser.toString());
