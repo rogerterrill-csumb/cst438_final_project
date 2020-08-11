@@ -38,14 +38,22 @@
         </tr>
     </form>
 
-    <form method = "GET"  th:action="@{/reservation/hotel}"id = "hotel">
+    <form method = "POST"  th:action="@{/new/hotel}"id = "hotel">
+      <table>
         <tr>
+          <th>Hotel Name</th>
+        </tr>
+        <tr th:each="hotel : ${hotels}">
+          <td th:text="${hotel.hotel_name}"></td>
+        </tr>
+      </table>
             <td>
                 <!--Insert Image for Hotel here-->
+
                 Hotel
             </td>
             <td>
-                <input type="submit" name="flight" value="Hotel"/>
+                <input type="submit" name="hotel" value="Hotel"/>
             </td>
         </tr>
     </form>

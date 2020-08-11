@@ -1,6 +1,8 @@
 package cst438_FinalProject.controller;
 
+import cst438_FinalProject.repository.HotelRepository;
 import cst438_FinalProject.repository.UserRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +29,9 @@ public class WelcomeController {
 
 	@Autowired
 	UserRepository userRepository;
+
+	@Autowired
+	HotelRepository hotelRepository;
 	
 	@GetMapping(value="/welcome")
 	public String welcome(
@@ -40,13 +45,18 @@ public class WelcomeController {
 		System.out.println(user.toString());
 		
 		String msg;
+
 		
 		if (userService.existUser()) {
 			msg = "Found User information for " + loginUser.getFname() + " " + loginUser.getLname();
 		} else {
 			msg = "Creating account for " + loginUser.getFname() + " " + loginUser.getLname();
 		}
+
 		model.addAttribute("msg",msg);
+
+
+//		model.addAttribute("hotels", hotels);
 		
 		return "welcome";
 	}
@@ -79,6 +89,15 @@ public class WelcomeController {
 			}
 	
 				return "welcome";
+	}
+
+	@PostMapping(value="/new/hotel")
+	public String createHotelReservation(Model model) {
+
+		System.out.println(user.getEmail());
+		System.out.println(hotelService.getAllHotelReservationsByEmail(user.getEmail()));
+
+		return "welcome";
 	}
 	
 	

@@ -12,5 +12,4 @@ import cst438_FinalProject.domain.User;
 @Table(name="user")
 public interface UserRepository extends JpaRepository<User,Long>{
 	List<User> findByEmail(String email);
-	
 }
