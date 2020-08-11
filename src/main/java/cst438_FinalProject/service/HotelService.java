@@ -24,13 +24,14 @@ public class HotelService {
     this.hotelBaseUrl = hotelBaseUrl;
   }
 
-  public void getAllHotelReservations() {
+  public boolean getAllHotelReservations() {
     ResponseEntity<JsonNode> response = restTemplate.getForEntity(this.hotelBaseUrl
             + "/api/hotelReservation/getAllReservations",
         JsonNode.class);
     JsonNode json = response.getBody();
     log.info("Status code form hotel reservation server: " + response.getStatusCodeValue());
     System.out.println(response);
+    return true;
   }
 
   public void getAllHotelReservationsByEmail(String email) {
