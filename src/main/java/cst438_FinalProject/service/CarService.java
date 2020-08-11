@@ -21,39 +21,41 @@ import cst438_FinalProject.domain.*;
 
 @Service
 public class CarService {
-	private static final Logger log = LoggerFactory.getLogger(CarService.class);
-	
-	private RestTemplate restTemplate;
-	
-	private String newCarReservationUrl;
-	
-	public CarService( @Value("${car.url}") final String carUrl) {
-		this.restTemplate = new RestTemplate();
-		this.newCarReservationUrl = carUrl + "/api/reservation/new";
-	}
-	
 
-	// For Sending JSON as a Body.
-	public boolean newCarReservation(Car car) {
-		ObjectMapper oMapper = new ObjectMapper();
-		Map<String,Object> map = oMapper.convertValue(car, Map.class);
-		
-			var headers = new HttpHeaders();
-			headers.setContentType(MediaType.APPLICATION_JSON);
-			
-			HttpEntity<Map<String,Object>> entity = new HttpEntity<>(map,headers);
-			
-			ResponseEntity<String> response = restTemplate.postForEntity(this.newCarReservationUrl, entity, String.class);
-			
-			// check response
-			if (response.getStatusCode() == HttpStatus.OK) {
-			    System.out.println("Request Successful");
-			    System.out.println(response.getBody());
-			    return true;
-			} else {
-			    System.out.println("Request Failed");
-			    System.out.println(response.getStatusCode());
-			    return false;
-			}
-	}
+  private static final Logger log = LoggerFactory.getLogger(CarService.class);
+
+  private RestTemplate restTemplate;
+
+  private String newCarReservationUrl;
+
+  public CarService(@Value("${car.url}") final String carUrl) {
+    this.restTemplate = new RestTemplate();
+    this.newCarReservationUrl = carUrl + "/api/reservation/new";
+  }
+
+
+  // For Sending JSON as a Body.
+  public boolean newCarReservation(Car car) {
+    ObjectMapper oMapper = new ObjectMapper();
+    Map<String, Object> map = oMapper.convertValue(car, Map.class);
+
+    var headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+
+    HttpEntity<Map<String, Object>> entity = new HttpEntity<>(map, headers);
+
+    ResponseEntity<String> response = restTemplate
+        .postForEntity(this.newCarReservationUrl, entity, String.class);
+
+    // check response
+    if (response.getStatusCode() == HttpStatus.OK) {
+      System.out.println("Request Successful");
+      System.out.println(response.getBody());
+      return true;
+    } else {
+      System.out.println("Request Failed");
+      System.out.println(response.getStatusCode());
+      return false;
+    }
+  }
 }
