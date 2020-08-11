@@ -2,6 +2,7 @@ package cst438_FinalProject.controller;
 
 import cst438_FinalProject.repository.HotelRepository;
 import cst438_FinalProject.repository.UserRepository;
+import java.util.Iterator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,8 +56,11 @@ public class WelcomeController {
 
 		model.addAttribute("msg",msg);
 
+//		hotelService.getAllHotelReservationsByEmail("billhurt@yahoo.com");
+		Iterable<Hotel> hotels = hotelRepository.findAll();
+		model.addAttribute("hotels", hotels);
 
-//		model.addAttribute("hotels", hotels);
+
 		
 		return "welcome";
 	}

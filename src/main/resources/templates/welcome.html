@@ -45,6 +45,10 @@
         </tr>
         <tr th:each="hotel : ${hotels}">
           <td th:text="${hotel.hotel_name}"></td>
+          <td th:text="${hotel.check_in}"></td>
+          <td th:text="${hotel.check_out}"></td>
+          <td th:text="${hotel.total_rooms}"></td>
+          <td th:text="${hotel.total_price}"></td>
         </tr>
       </table>
             <td>

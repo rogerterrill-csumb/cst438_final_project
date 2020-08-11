@@ -5,6 +5,8 @@ import cst438_FinalProject.repository.HotelRepository;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,25 +43,15 @@ public class HotelService {
   }
 
   public String getAllHotelReservationsByEmail(String email) {
-    String hotelName, checkIn, checkOut;
-    float totalRooms, totalPrice;
-    JsonNode current;
-
     ResponseEntity<JsonNode> response = restTemplate.getForEntity(this.hotelBaseUrl
             + "/api/hotelReservation/customerEmail/" + email,
         JsonNode.class);
-    JsonNode json = response.getBody();
-    Iterator<JsonNode> iterableJson = json.iterator();
-    while(iterableJson.hasNext()) {
-      current = iterableJson.next();
-      hotelName = current.get("hotelName").asText();
-      checkIn = current.get("checkIn").asText();
-      checkOut = current.get("checkOut").asText();
-      totalRooms = (float) current.get("totalRooms").asDouble();
-      totalPrice = (float) current.get("totalPrice").asDouble();
-      hotelRepository.save(new Hotel(hotelName, checkIn, checkOut, totalRooms, totalPrice));
-    }
-    return "Done";
+
+      JsonNode json = response.getBody();
+
+      hotelRepository.save(new Hotel("name", "in", "out", 12, 12));
+
+      return "done";
   }
 
   public void getAllHotelReservationsByCustomerId(int id) {

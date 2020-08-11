@@ -19,7 +19,6 @@ public class UserLoginController {
 	@GetMapping(value="/")
 	public String welcome(Model model) {
 
-		
 		LoginUser loginUser = new LoginUser();
 		
 		model.addAttribute("loginUser",loginUser);
