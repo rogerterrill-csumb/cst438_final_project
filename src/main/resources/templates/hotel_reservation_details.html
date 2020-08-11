@@ -1,0 +1,15 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Hotel Reservation</title>
+</head>
+<body>
+<h2>Details</h2>
+Hotel Name: <span th:inline="text"> [[${hotelDetails.hotel_name}]]</span><br/>
+Check In: <span th:inline="text"> [[${hotelDetails.check_in}]]</span><br/>
+Check Out: <span th:inline="text"> [[${hotelDetails.check_out}]]</span><br/>
+Total Rooms: <span th:inline="text"> [[${hotelDetails.total_rooms}]]</span><br/>
+Total Price: <span th:inline="text"> [[${hotelDetails.total_price}]]</span><br/>
+</body>
+</html>

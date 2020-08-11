@@ -39,19 +39,25 @@ public class HotelService {
     JsonNode json = response.getBody();
     log.info("Status code form hotel reservation server: " + response.getStatusCodeValue());
     System.out.println(response);
+    Iterator jsonIt = response.getBody().iterator();
+    while(jsonIt.hasNext()){
+      System.out.println(jsonIt.next().equals("hotel"));
+    }
     return true;
   }
 
   public String getAllHotelReservationsByEmail(String email) {
+    String message = "";
     ResponseEntity<JsonNode> response = restTemplate.getForEntity(this.hotelBaseUrl
             + "/api/hotelReservation/customerEmail/" + email,
         JsonNode.class);
 
       JsonNode json = response.getBody();
-
-//      hotelRepository.save(new Hotel("name", "in", "out", 12, 12));
-
-      return "done";
+      Iterator<JsonNode> iterableJson = json.iterator();
+      while(iterableJson.hasNext()){
+        message += iterableJson.next().get("resID").asText() + ", ";
+      }
+      return message;
   }
 
   public void getAllHotelReservationsByCustomerId(int id) {
@@ -62,12 +68,16 @@ public class HotelService {
     System.out.println(json);
   }
 
-  public void getHotelReservationByReservationId(int id) {
+  public Hotel getHotelReservationByReservationId(int id) {
     ResponseEntity<JsonNode> response = restTemplate.getForEntity(this.hotelBaseUrl
             + "/api/hotelReservation/reservations/" + id,
         JsonNode.class);
     JsonNode json = response.getBody();
     System.out.println(json);
+    return new Hotel(json.get("hotelName").asText(), json.get("checkIn").asText(), json.get(
+        "checkOut").asText(),
+        json.get(
+        "totalRooms").asInt(), json.get("totalPrice").floatValue());
   }
 
   public void cancelReservationByReservationId(int id) {

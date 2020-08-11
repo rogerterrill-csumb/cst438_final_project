@@ -39,18 +39,7 @@
   </form>
 
   <form method="POST" th:action="@{/new/hotel}" id="hotel">
-    <table>
-      <tr>
-        <th>Hotel Name</th>
-      </tr>
-      <tr th:each="hotel : ${hotels}">
-        <td th:text="${hotel.hotel_name}"></td>
-        <td th:text="${hotel.check_in}"></td>
-        <td th:text="${hotel.check_out}"></td>
-        <td th:text="${hotel.total_rooms}"></td>
-        <td th:text="${hotel.total_price}"></td>
-      </tr>
-    </table>
+
     <td>
       <!--Insert Image for Hotel here-->
 
@@ -160,6 +149,28 @@
         </tr>
       </table>
     </form>
+    <table>
+      <tr>
+        <th>Hotel Name</th>
+        <th>Check-In</th>
+        <th>Check-Out</th>
+        <th>Total Rooms</th>
+        <th>Total Price</th>
+      </tr>
+      <tr th:each="hotel : ${hotels}">
+        <td th:text="${hotel.hotel_name}"></td>
+        <td th:text="${hotel.check_in}"></td>
+        <td th:text="${hotel.check_out}"></td>
+        <td th:text="${hotel.total_rooms}"></td>
+        <td th:text="${hotel.total_price}"></td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <h2>Current Hotel Reservation Ids</h2>
+      </tr>
+      <tr th:inline="text"> [[${hotelReservationIds}]]</tr>
+    </table>
   </div>
 
 </div>

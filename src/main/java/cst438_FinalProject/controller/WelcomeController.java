@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import cst438_FinalProject.domain.*;
@@ -54,15 +55,14 @@ public class WelcomeController {
 		} else {
 			msg = "Creating account for " + loginUser.getFname() + " " + loginUser.getLname();
 		}
-
 		model.addAttribute("msg",msg);
 
-//		hotelService.getAllHotelReservationsByEmail("billhurt@yahoo.com");
+
+		String hotelReservationIds = hotelService.getAllHotelReservationsByEmail(user.getEmail());
+		model.addAttribute("hotelReservationIds", hotelReservationIds);
 		Iterable<Hotel> hotels = hotelRepository.findAll();
 		model.addAttribute("hotels", hotels);
 
-
-		
 		return "welcome";
 	}
 
@@ -107,11 +107,15 @@ public class WelcomeController {
 
 	@PostMapping(value="/hotel/cancel")
 	public String deleteHotelReservation(@RequestParam("id") int id, Model model) {
-
 		hotelService.cancelReservationByReservationId(id);
-
 		return "welcome";
 	}
-	
+
+	@GetMapping("/hotel/detail/{id}")
+	public String getHotelReservationInfo(@PathVariable("id") int id, Model model) {
+		Hotel hotel = hotelService.getHotelReservationByReservationId(id);
+		model.addAttribute("hotelDetails", hotel);
+		return "hotel_reservation_details";
+	}
 	
 }
