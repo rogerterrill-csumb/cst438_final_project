@@ -111,8 +111,8 @@ public class WelcomeController {
 		return "welcome";
 	}
 
-	@GetMapping("/hotel/detail/{id}")
-	public String getHotelReservationInfo(@PathVariable("id") int id, Model model) {
+	@PostMapping(value="/hotel/detail")
+	public String getHotelReservationInfo(@RequestParam("id") int id, Model model) {
 		Hotel hotel = hotelService.getHotelReservationByReservationId(id);
 		model.addAttribute("hotelDetails", hotel);
 		return "hotel_reservation_details";

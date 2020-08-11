@@ -139,7 +139,6 @@
             Enter Id of Hotel Reservation: <input type="text" th:name="id"/>
           </td>
         </tr>
-
         <tr>
           <td>
             <div>
@@ -171,6 +170,23 @@
       </tr>
       <tr th:inline="text"> [[${hotelReservationIds}]]</tr>
     </table>
+    <form action="#" method="post" th:action="@{/hotel/detail/}">
+      <table>
+        <tr>
+          <td>
+            <label>Hotel Reservation Details</label>
+            Enter Id of Hotel Reservation: <input type="text" th:name="id"/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div>
+              <button type="submit">Submit</button>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </form>
   </div>
 
 </div>
