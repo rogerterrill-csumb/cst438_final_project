@@ -56,8 +56,6 @@ public class WelcomeController {
     }
     model.addAttribute("msg", msg);
 
-    String hotelReservationIds = hotelService.getAllHotelReservationsByEmail(user.getEmail());
-    model.addAttribute("hotelReservationIds", hotelReservationIds);
     Iterable<Hotel> hotels = hotelService.getAllHotelReservationsByEmailList(user.getEmail());
     model.addAttribute("hotels", hotels);
 
@@ -97,7 +95,6 @@ public class WelcomeController {
   public String createHotelReservation(Model model) {
 
     System.out.println(user.getEmail());
-    System.out.println(hotelService.getAllHotelReservationsByEmail(user.getEmail()));
 
     return "welcome";
   }
