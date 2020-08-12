@@ -29,6 +29,9 @@ public class WelcomeController {
 
   @Autowired
   HotelService hotelService;
+  
+  @Autowired
+  FlightService flightService;
 
   @Autowired
   UserRepository userRepository;
