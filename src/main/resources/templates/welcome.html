@@ -166,12 +166,6 @@
         <td th:text="${hotel.total_price}"></td>
       </tr>
     </table>
-    <table>
-      <tr>
-        <h2>Current Hotel Reservation Ids</h2>
-      </tr>
-      <tr th:inline="text"> [[${hotelReservationIds}]]</tr>
-    </table>
     <form action="#" method="post" th:action="@{/hotel/detail/}">
       <table>
         <tr>
