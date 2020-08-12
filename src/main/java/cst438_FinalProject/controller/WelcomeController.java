@@ -60,7 +60,8 @@ public class WelcomeController {
 
 		String hotelReservationIds = hotelService.getAllHotelReservationsByEmail(user.getEmail());
 		model.addAttribute("hotelReservationIds", hotelReservationIds);
-		Iterable<Hotel> hotels = hotelRepository.findAll();
+//		Iterable<Hotel> hotels = hotelRepository.findAll();
+		Iterable<Hotel> hotels = hotelService.getAllHotelReservationsByEmailList(user.getEmail());
 		model.addAttribute("hotels", hotels);
 
 		return "welcome";

@@ -52,12 +52,36 @@ public class HotelService {
             + "/api/hotelReservation/customerEmail/" + email,
         JsonNode.class);
 
+    JsonNode json = response.getBody();
+    Iterator<JsonNode> iterableJson = json.iterator();
+    while(iterableJson.hasNext()) {
+      message += iterableJson.next().get("resID").asText() + ", ";
+    }
+      return message;
+
+  }
+
+  public List<Hotel> getAllHotelReservationsByEmailList(String email) {
+    JsonNode current;
+
+    List<Hotel> hotels = new ArrayList<>();
+    ResponseEntity<JsonNode> response = restTemplate.getForEntity(this.hotelBaseUrl
+            + "/api/hotelReservation/customerEmail/" + email,
+        JsonNode.class);
+
       JsonNode json = response.getBody();
       Iterator<JsonNode> iterableJson = json.iterator();
       while(iterableJson.hasNext()){
-        message += iterableJson.next().get("resID").asText() + ", ";
+        current = iterableJson.next();
+
+        hotels.add(new Hotel(current.get("resID").asInt(), current.get("hotelName").asText(),
+            current.get("checkIn").asText(),
+            current.get(
+            "checkOut").asText(),
+            current.get(
+                "totalRooms").asInt(), current.get("totalPrice").floatValue()));
       }
-      return message;
+      return hotels;
   }
 
   public void getAllHotelReservationsByCustomerId(int id) {
@@ -74,7 +98,9 @@ public class HotelService {
         JsonNode.class);
     JsonNode json = response.getBody();
     System.out.println(json);
-    return new Hotel(json.get("hotelName").asText(), json.get("checkIn").asText(), json.get(
+    return new Hotel(json.get("resID").asInt(), json.get("hotelName").asText(),
+        json.get("checkIn").asText(),
+        json.get(
         "checkOut").asText(),
         json.get(
         "totalRooms").asInt(), json.get("totalPrice").floatValue());

@@ -150,6 +150,7 @@
     </form>
     <table>
       <tr>
+        <th>Reservation ID</th>
         <th>Hotel Name</th>
         <th>Check-In</th>
         <th>Check-Out</th>
@@ -157,6 +158,7 @@
         <th>Total Price</th>
       </tr>
       <tr th:each="hotel : ${hotels}">
+        <td th:text="${hotel.reservation_id}"></td>
         <td th:text="${hotel.hotel_name}"></td>
         <td th:text="${hotel.check_in}"></td>
         <td th:text="${hotel.check_out}"></td>

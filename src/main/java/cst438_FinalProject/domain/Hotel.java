@@ -13,6 +13,7 @@ public class Hotel { //These fields were obtain from the Hotel Reservation ERD, 
   @GeneratedValue
   private long id;
 
+  private int reservation_id;
   private String hotel_name;
   private String check_in;
   private String check_out;
@@ -21,9 +22,11 @@ public class Hotel { //These fields were obtain from the Hotel Reservation ERD, 
 
   public Hotel(){};
 
-  public Hotel(long id, String hotel_name, String check_in, String check_out, float total_rooms,
+  public Hotel(long id, int reservation_id, String hotel_name, String check_in, String check_out,
+      float total_rooms,
       float total_price) {
     this.id = id;
+    this.reservation_id = reservation_id;
     this.hotel_name = hotel_name;
     this.check_in = check_in;
     this.check_out = check_out;
@@ -31,13 +34,23 @@ public class Hotel { //These fields were obtain from the Hotel Reservation ERD, 
     this.total_price = total_price;
   }
 
-  public Hotel(String hotel_name, String check_in, String check_out, float total_rooms,
+  public Hotel(int reservation_id, String hotel_name, String check_in, String check_out,
+      float total_rooms,
       float total_price) {
+    this.reservation_id = reservation_id;
     this.hotel_name = hotel_name;
     this.check_in = check_in;
     this.check_out = check_out;
     this.total_rooms = total_rooms;
     this.total_price = total_price;
+  }
+
+  public int getReservation_id() {
+    return reservation_id;
+  }
+
+  public void setReservation_id(int reservation_id) {
+    this.reservation_id = reservation_id;
   }
 
   public long getId() {
@@ -91,7 +104,9 @@ public class Hotel { //These fields were obtain from the Hotel Reservation ERD, 
   @Override
   public String toString() {
     return "Hotel{" +
-        "hotel_name='" + hotel_name + '\'' +
+        "id=" + id +
+        ", reservation_id=" + reservation_id +
+        ", hotel_name='" + hotel_name + '\'' +
         ", check_in='" + check_in + '\'' +
         ", check_out='" + check_out + '\'' +
         ", total_rooms=" + total_rooms +
@@ -108,7 +123,9 @@ public class Hotel { //These fields were obtain from the Hotel Reservation ERD, 
       return false;
     }
     Hotel hotel = (Hotel) o;
-    return Float.compare(hotel.total_rooms, total_rooms) == 0 &&
+    return id == hotel.id &&
+        reservation_id == hotel.reservation_id &&
+        Float.compare(hotel.total_rooms, total_rooms) == 0 &&
         Float.compare(hotel.total_price, total_price) == 0 &&
         hotel_name.equals(hotel.hotel_name) &&
         check_in.equals(hotel.check_in) &&
@@ -117,6 +134,7 @@ public class Hotel { //These fields were obtain from the Hotel Reservation ERD, 
 
   @Override
   public int hashCode() {
-    return Objects.hash(hotel_name, check_in, check_out, total_rooms, total_price);
+    return Objects
+        .hash(id, reservation_id, hotel_name, check_in, check_out, total_rooms, total_price);
   }
 }
