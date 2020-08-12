@@ -40,7 +40,7 @@ public class HotelService {
     log.info("Status code form hotel reservation server: " + response.getStatusCodeValue());
     System.out.println(response);
     Iterator jsonIt = response.getBody().iterator();
-    while(jsonIt.hasNext()){
+    while (jsonIt.hasNext()) {
       System.out.println(jsonIt.next().equals("hotel"));
     }
     return true;
@@ -54,10 +54,10 @@ public class HotelService {
 
     JsonNode json = response.getBody();
     Iterator<JsonNode> iterableJson = json.iterator();
-    while(iterableJson.hasNext()) {
+    while (iterableJson.hasNext()) {
       message += iterableJson.next().get("resID").asText() + ", ";
     }
-      return message;
+    return message;
 
   }
 
@@ -69,19 +69,19 @@ public class HotelService {
             + "/api/hotelReservation/customerEmail/" + email,
         JsonNode.class);
 
-      JsonNode json = response.getBody();
-      Iterator<JsonNode> iterableJson = json.iterator();
-      while(iterableJson.hasNext()){
-        current = iterableJson.next();
+    JsonNode json = response.getBody();
+    Iterator<JsonNode> iterableJson = json.iterator();
+    while (iterableJson.hasNext()) {
+      current = iterableJson.next();
 
-        hotels.add(new Hotel(current.get("resID").asInt(), current.get("hotelName").asText(),
-            current.get("checkIn").asText(),
-            current.get(
-            "checkOut").asText(),
-            current.get(
-                "totalRooms").asInt(), current.get("totalPrice").floatValue()));
-      }
-      return hotels;
+      hotels.add(new Hotel(current.get("resID").asInt(), current.get("hotelName").asText(),
+          current.get("checkIn").asText(),
+          current.get(
+              "checkOut").asText(),
+          current.get(
+              "totalRooms").asInt(), current.get("totalPrice").floatValue()));
+    }
+    return hotels;
   }
 
   public void getAllHotelReservationsByCustomerId(int id) {
@@ -101,9 +101,9 @@ public class HotelService {
     return new Hotel(json.get("resID").asInt(), json.get("hotelName").asText(),
         json.get("checkIn").asText(),
         json.get(
-        "checkOut").asText(),
+            "checkOut").asText(),
         json.get(
-        "totalRooms").asInt(), json.get("totalPrice").floatValue());
+            "totalRooms").asInt(), json.get("totalPrice").floatValue());
   }
 
   public void cancelReservationByReservationId(int id) {

@@ -18,105 +18,101 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class WelcomeController {
-	
-	private static User user;
-	
-	@Autowired
-	UserService userService;
-	
-	@Autowired
-	CarService carService;
 
-	@Autowired
-	HotelService hotelService;
+  private static User user;
 
-	@Autowired
-	UserRepository userRepository;
+  @Autowired
+  UserService userService;
 
-	@Autowired
-	HotelRepository hotelRepository;
-	
-	@GetMapping(value="/welcome")
-	public String welcome(
-			@ModelAttribute("loginUser") LoginUser loginUser,
-			Model model) {
-		
-		//Checking if the Login User was passed Correctly
-		System.out.println(loginUser.toString());
-		
-		user = userService.getUser(loginUser);
-		System.out.println(user.toString());
-		
-		String msg;
+  @Autowired
+  CarService carService;
 
-		
-		if (userService.existUser()) {
-			msg = "Found User information for " + loginUser.getFname() + " " + loginUser.getLname();
-		} else {
-			msg = "Creating account for " + loginUser.getFname() + " " + loginUser.getLname();
-		}
-		model.addAttribute("msg",msg);
+  @Autowired
+  HotelService hotelService;
 
+  @Autowired
+  UserRepository userRepository;
 
-		String hotelReservationIds = hotelService.getAllHotelReservationsByEmail(user.getEmail());
-		model.addAttribute("hotelReservationIds", hotelReservationIds);
-//		Iterable<Hotel> hotels = hotelRepository.findAll();
-		Iterable<Hotel> hotels = hotelService.getAllHotelReservationsByEmailList(user.getEmail());
-		model.addAttribute("hotels", hotels);
+  @Autowired
+  HotelRepository hotelRepository;
 
-		return "welcome";
-	}
+  @GetMapping(value = "/welcome")
+  public String welcome(
+      @ModelAttribute("loginUser") LoginUser loginUser,
+      Model model) {
 
-	@PostMapping(value="/new/car")
-	public String createCarReservation(
-			@ModelAttribute("car") Car car,
-			Model model) {
-			
-			car.setEmail(user.getEmail());
-			
-			System.out.println("CAR OBJECT: " + car.toString());
-			boolean testCar;
-			try {
-				 testCar = carService.newCarReservation(car);
-			 
-			} catch (Exception e) {
-				System.out.println("W3AController : createUser exception. "+e.getMessage());
-				model.addAttribute("message", e.getMessage());
-				System.out.println(e.getMessage());
-				return "error";
-			}
-			
-			
-			if(testCar) {
-				System.out.println("SUCCESS CAR");
-			
-			} else {
-				System.out.println("FAIL CAR");
-			}
-	
-				return "welcome";
-	}
+    //Checking if the Login User was passed Correctly
+    System.out.println(loginUser.toString());
 
-	@PostMapping(value="/new/hotel")
-	public String createHotelReservation(Model model) {
+    user = userService.getUser(loginUser);
+    System.out.println(user.toString());
 
-		System.out.println(user.getEmail());
-		System.out.println(hotelService.getAllHotelReservationsByEmail(user.getEmail()));
+    String msg;
 
-		return "welcome";
-	}
+    if (userService.existUser()) {
+      msg = "Found User information for " + loginUser.getFname() + " " + loginUser.getLname();
+    } else {
+      msg = "Creating account for " + loginUser.getFname() + " " + loginUser.getLname();
+    }
+    model.addAttribute("msg", msg);
 
-	@PostMapping(value="/hotel/cancel")
-	public String deleteHotelReservation(@RequestParam("id") int id, Model model) {
-		hotelService.cancelReservationByReservationId(id);
-		return "welcome";
-	}
+    String hotelReservationIds = hotelService.getAllHotelReservationsByEmail(user.getEmail());
+    model.addAttribute("hotelReservationIds", hotelReservationIds);
+    Iterable<Hotel> hotels = hotelService.getAllHotelReservationsByEmailList(user.getEmail());
+    model.addAttribute("hotels", hotels);
 
-	@PostMapping(value="/hotel/detail")
-	public String getHotelReservationInfo(@RequestParam("id") int id, Model model) {
-		Hotel hotel = hotelService.getHotelReservationByReservationId(id);
-		model.addAttribute("hotelDetails", hotel);
-		return "hotel_reservation_details";
-	}
-	
+    return "welcome";
+  }
+
+  @PostMapping(value = "/new/car")
+  public String createCarReservation(
+      @ModelAttribute("car") Car car,
+      Model model) {
+
+    car.setEmail(user.getEmail());
+
+    System.out.println("CAR OBJECT: " + car.toString());
+    boolean testCar;
+    try {
+      testCar = carService.newCarReservation(car);
+
+    } catch (Exception e) {
+      System.out.println("W3AController : createUser exception. " + e.getMessage());
+      model.addAttribute("message", e.getMessage());
+      System.out.println(e.getMessage());
+      return "error";
+    }
+
+    if (testCar) {
+      System.out.println("SUCCESS CAR");
+
+    } else {
+      System.out.println("FAIL CAR");
+    }
+
+    return "welcome";
+  }
+
+  @PostMapping(value = "/new/hotel")
+  public String createHotelReservation(Model model) {
+
+    System.out.println(user.getEmail());
+    System.out.println(hotelService.getAllHotelReservationsByEmail(user.getEmail()));
+
+    return "welcome";
+  }
+
+  @PostMapping(value = "/hotel/cancel")
+  public String deleteHotelReservation(@RequestParam("id") int id, Model model) {
+    hotelService.cancelReservationByReservationId(id);
+    return "welcome";
+  }
+
+  @PostMapping(value = "/hotel/detail")
+  public String getHotelReservationInfo(@RequestParam("id") int id, Model model) {
+    Hotel hotel = hotelService.getHotelReservationByReservationId(id);
+    model.addAttribute("hotelDetails", hotel);
+    return "hotel_reservation_details";
+  }
+
 }
