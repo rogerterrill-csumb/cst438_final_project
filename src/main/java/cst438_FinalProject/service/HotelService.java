@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -74,12 +76,13 @@ public class HotelService {
     while (iterableJson.hasNext()) {
       current = iterableJson.next();
 
-      hotels.add(new Hotel(current.get("resID").asInt(), current.get("hotelName").asText(),
-          current.get("checkIn").asText(),
-          current.get(
-              "checkOut").asText(),
-          current.get(
-              "totalRooms").asInt(), current.get("totalPrice").floatValue()));
+      hotels.add(new Hotel(
+        current.get("resID").asInt(), 
+        current.get("hotelName").asText(),
+        current.get("checkIn").asText(),
+        current.get("checkOut").asText(),
+        current.get("totalRooms").asInt(), 
+        current.get("totalPrice").floatValue()));
     }
     return hotels;
   }
@@ -98,12 +101,14 @@ public class HotelService {
         JsonNode.class);
     JsonNode json = response.getBody();
     System.out.println(json);
-    return new Hotel(json.get("resID").asInt(), json.get("hotelName").asText(),
+    return new Hotel(
+        json.get("resID").asInt(), 
+        json.get("hotelName").asText(),
         json.get("checkIn").asText(),
-        json.get(
-            "checkOut").asText(),
-        json.get(
-            "totalRooms").asInt(), json.get("totalPrice").floatValue());
+        json.get("checkOut").asText(),
+        json.get("totalRooms").asInt(), 
+        json.get("totalPrice").floatValue()
+      );
   }
 
   public void cancelReservationByReservationId(int id) {
