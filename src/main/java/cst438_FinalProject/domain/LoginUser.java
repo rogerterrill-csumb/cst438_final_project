@@ -1,6 +1,5 @@
 package cst438_FinalProject.domain;
 
-import javax.persistence.Id;
 
 public class LoginUser {
 		  private String fname;
