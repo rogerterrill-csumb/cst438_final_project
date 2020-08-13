@@ -150,14 +150,13 @@ public class WelcomeController {
 				System.out.println("Failed to Cancel Car Reservation");
 				model.addAttribute("carMessage", "Failed to Cancel Car Reservation");
 			}
-	
+
 			return "welcome";
 		}
+
 	@GetMapping(value="/details/car")
 	public String getCarDetails(
 	Model model) {
-		
-
 		String awesome = carService.getReservationID(user.getEmail());
 		System.out.println("Found records");
 		System.out.println(awesome);
