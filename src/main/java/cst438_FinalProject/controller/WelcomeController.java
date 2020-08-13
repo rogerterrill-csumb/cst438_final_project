@@ -128,5 +128,28 @@ public class WelcomeController {
     model.addAttribute("hotelDetails", hotel);
     return "hotel_reservation_details";
   }
+	@PostMapping(value="/cancel/car")
+		public String createCarReservation(
+				@ModelAttribute("carId") String carId,
+				Model model) {
+			boolean status;
+			try {
+				status = carService.cancelCarReservation(carId);
+			} catch (Exception e) {
+				System.out.println("CancelCar Exception. " + e.getMessage());
+				model.addAttribute("message", e.getMessage());
+				System.out.println(e.getMessage());
+				status = false;
+			}
+			if(status) {
+				System.out.println("New Car Reservation Created");
+				model.addAttribute("carMessage", "Cancelled Car Reservation");
+			
+			} else {
+				System.out.println("Failed to Cancel Car Reservation");
+				model.addAttribute("carMessage", "Failed to Cancel Car Reservation");
+			}
 
+			return "welcome";
+		}
 }

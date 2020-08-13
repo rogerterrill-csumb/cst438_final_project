@@ -2,6 +2,7 @@ package cst438_FinalProject.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -27,10 +28,12 @@ public class CarService {
   private RestTemplate restTemplate;
 
   private String newCarReservationUrl;
+  private String cancelCarReservationUrl;
 
   public CarService(@Value("${car.url}") final String carUrl) {
     this.restTemplate = new RestTemplate();
     this.newCarReservationUrl = carUrl + "/api/reservation/new";
+    this.cancelCarReservationUrl = carUrl +"/api/reservation/cancel";
   }
 
 
@@ -57,5 +60,25 @@ public class CarService {
       System.out.println(response.getStatusCode());
       return false;
     }
+  }
+    public boolean cancelCarReservation(String id) {
+	  
+	  var headers = new HttpHeaders();
+	  headers.setContentType(MediaType.APPLICATION_JSON);
+	  
+	  Map<String,String> map = new HashMap<>();
+	  map.put("reservationID",id);
+
+	  HttpEntity<Map<String,String>> entity = new HttpEntity<>(map,headers);
+	  ResponseEntity<String> response = restTemplate.postForEntity(this.cancelCarReservationUrl, entity, String.class);
+
+	  if (response.getStatusCode() == HttpStatus.NO_CONTENT) {
+		  System.out.println("Car Cancel Successful");
+		  return true;
+	  } else {
+		  System.out.println("Car Cancel Failed");
+		  System.out.println(response.getStatusCode());
+		  return false;
+	  }
   }
 }
