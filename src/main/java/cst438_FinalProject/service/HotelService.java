@@ -123,6 +123,7 @@ public class HotelService {
       String message = response.getBody();
       System.out.println(message);
     } catch (HttpStatusCodeException ex) {
+      System.out.println(this.hotelBaseUrl + "/api/hotelReservation/cancelByReservationID/" + id);
       System.out.println(ex.getStatusCode());
     }
   }
