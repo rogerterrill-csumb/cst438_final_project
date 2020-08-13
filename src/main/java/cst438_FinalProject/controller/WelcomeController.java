@@ -94,8 +94,22 @@ public class WelcomeController {
     return "welcome";
   }
 
-  @PostMapping(value = "/new/hotel")
-  public String createHotelReservation(Model model) {
+  @PostMapping(value = "/hotel/new")
+  public String createHotelReservation(
+      @RequestParam("hotelid") int hotelid,
+      @RequestParam("checkinmonth") String checkinmonth,
+      @RequestParam("checkinday") String checkinday,
+      @RequestParam("checkinyear") String checkinyear,
+      @RequestParam("checkoutmonth") String checkoutmonth,
+      @RequestParam("checkoutday") String checkoutday,
+      @RequestParam("checkoutyear") String checkoutyear,
+      @RequestParam("roomtype") String roomtype,
+      @RequestParam("numrooms") int numrooms,
+      Model model) {
+
+    hotelService.newReservation(hotelid, user.getFname(), user.getLname(), user.getEmail(), checkinmonth,
+        checkinday,
+        checkinyear, checkoutmonth, checkoutday, checkoutyear, roomtype, numrooms);
 
     System.out.println(user.getEmail());
 
