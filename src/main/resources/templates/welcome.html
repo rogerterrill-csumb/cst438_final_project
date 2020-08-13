@@ -14,43 +14,6 @@
   <h2>Welcome to the Reservation Website!</h2>
   <p><span style="color:blue" th:text="${msg}"></span></p>
 
-  <form method="GET" th:action="@{/reservation/car}" id="car">
-    <tr>
-      <td>
-        <!--Insert Image for Car here-->
-        Car
-      </td>
-      <td>
-        <input type="submit" name="car" value="car"/>
-      </td>
-    </tr>
-  </form>
-
-  <form method="GET" th:action="@{/reservation/flight}" id="flight">
-    <tr>
-      <td>
-        <!--Insert Image for flight here-->
-        Flight
-      </td>
-      <td>
-        <input type="submit" name="flight" value="Flight"/>
-      </td>
-    </tr>
-  </form>
-
-  <form method="POST" th:action="@{/new/hotel}" id="hotel">
-
-    <td>
-      <!--Insert Image for Hotel here-->
-
-      Hotel
-    </td>
-    <td>
-      <input type="submit" name="hotel" value="Hotel"/>
-    </td>
-    </tr>
-  </form>
-
 
   <div>
     <form action="#" method="post" th:action="@{/new/car}" th:object="${car}">
@@ -135,9 +98,21 @@
            <button type="submit">Cancel Reservation</button>
         </form>
      </div>
-  </div> <br>
+  <br>
+<!--  GET Car RESERVATIONS-->
+   <div>
+        <form action="#" method="GET" th:action="@{/details/car}">
+           <Label>Get Reservation ID</Label>
+
+           <button type="submit">Get Car Details</button>
+        </form>
+        <p><span style="color:blue" th:text="${carID}"></span></p><br>
+     </div>
+  </div>  <br>
+
 <!--  HOTEL RESERVATIONS-->
-  <div>
+<div class="container">
+  <div >
     <form action="#" method="post" th:action="@{/hotel/new}">
       <table>
         <tr>
@@ -265,7 +240,6 @@
       </table>
     </form>
   </div>
-
 </div>
 </body>
 </html>
