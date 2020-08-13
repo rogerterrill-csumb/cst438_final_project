@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import cst438_FinalProject.domain.*;
 import cst438_FinalProject.service.*;
+import cst438_FinalProject.repository.*;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -149,7 +150,18 @@ public class WelcomeController {
 				System.out.println("Failed to Cancel Car Reservation");
 				model.addAttribute("carMessage", "Failed to Cancel Car Reservation");
 			}
-
+	
 			return "welcome";
 		}
+	@GetMapping(value="/details/car")
+	public String getCarDetails(
+	Model model) {
+		
+
+		String awesome = carService.getReservationID(user.getEmail());
+		System.out.println("Found records");
+		System.out.println(awesome);
+		model.addAttribute("carID","Found Reservation ID: " + awesome);
+		return "welcome";
+	}
 }

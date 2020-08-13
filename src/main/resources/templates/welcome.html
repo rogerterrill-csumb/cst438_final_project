@@ -135,9 +135,22 @@
            <button type="submit">Cancel Reservation</button>
         </form>
      </div>
-  </div> <br>
+  <br>
+<!--  GET Car RESERVATIONS-->
+   <div>
+        <form action="#" method="GET" th:action="@{/details/car}">
+           <Label>Get Reservation ID</Label>
+
+           <button type="submit">Get Car Details</button>
+        </form>
+        <p><span style="color:blue" th:text="${carID}"></span></p><br>
+     </div>
+  </div>  <br>
+    
+  
 <!--  HOTEL RESERVATIONS-->
-  <div>
+<div class="container">
+  <div >
     <form action="#" method="post" th:action="@{/hotel/new}">
       <table>
         <tr>
@@ -265,7 +278,6 @@
       </table>
     </form>
   </div>
-
 </div>
 </body>
 </html>

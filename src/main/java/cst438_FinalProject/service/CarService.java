@@ -2,14 +2,18 @@ package cst438_FinalProject.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -29,11 +33,13 @@ public class CarService {
 
   private String newCarReservationUrl;
   private String cancelCarReservationUrl;
+  private String getCarReservations;
 
   public CarService(@Value("${car.url}") final String carUrl) {
     this.restTemplate = new RestTemplate();
     this.newCarReservationUrl = carUrl + "/api/reservation/new";
     this.cancelCarReservationUrl = carUrl +"/api/reservation/cancel";
+    this.getCarReservations = carUrl + "/api/reservations";
   }
 
 
@@ -81,4 +87,32 @@ public class CarService {
 		  return false;
 	  }
   }
+    
+    public String getReservationID(String email){
+    	System.out.println("Reservation ID");
+    	
+    	String finalID ="";
+    	ResponseEntity<List<CarResponse>> response = restTemplate.exchange(this.getCarReservations, HttpMethod.GET, null, new ParameterizedTypeReference<List<CarResponse>>() {});
+    	
+    	List<CarResponse> items = response.getBody();
+    	System.out.println(items.toString());
+    	
+    	for (int i = 0; i < items.size()-1; i++) {
+    		try {
+        		String currentEmail = items.get(i).getEmail().toLowerCase();
+        		if(currentEmail == null || currentEmail.isEmpty() ) {
+        			continue;
+        		}
+        		if(currentEmail.toLowerCase().equals(email.toLowerCase())) {
+        			finalID += items.get(i).getReservationID() +" ";
+        		}
+    		} catch (Exception e) {
+    			System.out.println( e);
+    		}
+
+    	}
+    	
+    	return finalID;
+  	    
+    }
 }
