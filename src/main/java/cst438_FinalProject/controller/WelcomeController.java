@@ -151,5 +151,21 @@ public class WelcomeController {
 			}
 
 			return "welcome";
-		}
+	}
+
+
+@PostMapping(value = "/flight/new")
+public String createFlightReservation(
+    @RequestParam("flightID") int flightID,
+    @RequestParam("seatClass") String seatClass,
+    @RequestParam("numPassengers") int numPassengers,
+    Model model) {
+
+  flightService.newFlightReservation(flightID, user.getEmail(), seatClass, numPassengers);
+
+  System.out.println(user.getEmail());
+
+  return "welcome";
+
+	}
 }

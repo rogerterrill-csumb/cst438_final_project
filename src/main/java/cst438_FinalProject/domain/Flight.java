@@ -10,6 +10,8 @@ public class Flight {
 	//@Id
 	//@GeneratedValue
 	//private long id;
+	
+	
 	private String email;
 	private String seatClass;
 	private int numPassengers;

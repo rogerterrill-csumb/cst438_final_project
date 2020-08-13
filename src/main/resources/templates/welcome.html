@@ -14,44 +14,6 @@
   <h2>Welcome to the Reservation Website!</h2>
   <p><span style="color:blue" th:text="${msg}"></span></p>
 
-  <form method="GET" th:action="@{/reservation/car}" id="car">
-    <tr>
-      <td>
-        <!--Insert Image for Car here-->
-        Car
-      </td>
-      <td>
-        <input type="submit" name="car" value="car"/>
-      </td>
-    </tr>
-  </form>
-
-  <form method="GET" th:action="@{/reservation/flight}" id="flight">
-    <tr>
-      <td>
-        <!--Insert Image for flight here-->
-        Flight
-      </td>
-      <td>
-        <input type="submit" name="flight" value="Flight"/>
-      </td>
-    </tr>
-  </form>
-
-  <form method="POST" th:action="@{/new/hotel}" id="hotel">
-
-    <td>
-      <!--Insert Image for Hotel here-->
-
-      Hotel
-    </td>
-    <td>
-      <input type="submit" name="hotel" value="Hotel"/>
-    </td>
-    </tr>
-  </form>
-
-
   <div>
     <form action="#" method="post" th:action="@{/new/car}" th:object="${car}">
       <table>
@@ -112,7 +74,7 @@
                 <option value="SUV">SUV</option>
                 <option value="Fullsize">Full Size</option>
                 <option value="Economy">Economy</option>
-                <option value="Compact">Economy</option>
+                <option value="Compact">Compact</option>
               </select>
             </div>
           </td>
@@ -127,6 +89,7 @@
       </table>
     </form>
   </div>
+  
 <!--  Cancel Car RESERVATIONS-->
    <div>
         <form action="#" method="POST" th:action="@{/cancel/car}" th:object="${carId}">
@@ -265,7 +228,89 @@
       </table>
     </form>
   </div>
+  
+<!--  FLIGHT RESERVATIONS-->
+  <div>
+    <form action="#" method="post" th:action="@{/flight/new}">
+      <table>
+        <tr>
+          <h2>Flight Reservation - Under Construction</h2>
+        </tr>
+        <tr>
+          <td>
+            <label>Flight Type</label>
+          </td>
+          <td>
+            <select name="flightID">
+              <option value=1>Honolulu to Monterey</option>
+              <option value=2>Honolulu to San Diego</option>
+              <option value=5>San Diego to Honolulu</option>
+              <option value=6>San Diego to Monterey</option>
+              <option value=11>Monterey to San Diego</option>
+              <option value=12>Monterey to Honolulu</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Flight Date (Only September 1st 2020 available)</label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Return Date (Only September 1st 2020 available)</label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Flight Type</label>
+          </td>
+          <td>
+            <select name="seatClass">
+              <option value="economy">Economy</option>
+              <option value="business">Business</option>
+              <option value="first">First</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Number of Passengers</label>
+          </td>
+          <td>
+            <input type="number" name="numPassengers" min="1" max="10" placeholder="Total">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div>
+              <button type="submit">Submit</button>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <div>
+    <form action="#" method="post" th:action="@{/welcome}">
+      <table>
+        <tr>
+          <td>
+            <label>Cancel Flight - Under Construction</label>
+            Enter Id of Flight Reservation: <input type="text" th:name="flightID"/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div>
+              <button type="submit">Submit</button>
+            </div>
+          </td>	
+        </tr>
+      </table>
+    </form>
+    
+  </div>
 
-</div>
 </body>
 </html>
