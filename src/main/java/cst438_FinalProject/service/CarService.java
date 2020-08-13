@@ -2,13 +2,11 @@ package cst438_FinalProject.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-=======
+
 import java.util.HashMap;
->>>>>>> 336c736649d37315da8df4453ce1e30616e34de0
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -37,19 +35,17 @@ public class CarService {
 
   private String newCarReservationUrl;
   private String cancelCarReservationUrl;
-<<<<<<< HEAD
+
   private String getCarReservations;
-=======
->>>>>>> 336c736649d37315da8df4453ce1e30616e34de0
+
 
   public CarService(@Value("${car.url}") final String carUrl) {
     this.restTemplate = new RestTemplate();
     this.newCarReservationUrl = carUrl + "/api/reservation/new";
     this.cancelCarReservationUrl = carUrl +"/api/reservation/cancel";
-<<<<<<< HEAD
+
     this.getCarReservations = carUrl + "/api/reservations";
-=======
->>>>>>> 336c736649d37315da8df4453ce1e30616e34de0
+
   }
 
 
@@ -97,7 +93,7 @@ public class CarService {
 		  return false;
 	  }
   }
-<<<<<<< HEAD
+
     
     public String getReservationID(String email){
     	System.out.println("Reservation ID");
@@ -126,6 +122,4 @@ public class CarService {
     	return finalID;
   	    
     }
-=======
->>>>>>> 336c736649d37315da8df4453ce1e30616e34de0
 }
