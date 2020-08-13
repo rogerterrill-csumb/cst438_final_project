@@ -127,6 +127,18 @@
       </table>
     </form>
   </div>
+   <!-----------------------Cancel Car---------------------->
+   <div>
+        <form action="#" method="POST" th:action="@{/cancel/car}" th:object="${carId}">
+           <Label>Cancel Car Reservation</Label>
+           <input type="text" name=carId placeholder="Please enter an ID">
+           <button type="submit">Cancel Reservation</button>
+        </form>
+     </div>
+  </div>
+  
+  
+  
   <div>
     <form action="#" method="post" th:action="@{/hotel/cancel}">
       <table>
