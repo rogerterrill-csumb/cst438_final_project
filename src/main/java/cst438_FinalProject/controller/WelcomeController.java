@@ -29,6 +29,9 @@ public class WelcomeController {
 
   @Autowired
   HotelService hotelService;
+  
+  @Autowired
+  FlightService flightService;
 
   @Autowired
   UserRepository userRepository;
@@ -56,8 +59,6 @@ public class WelcomeController {
     }
     model.addAttribute("msg", msg);
 
-    String hotelReservationIds = hotelService.getAllHotelReservationsByEmail(user.getEmail());
-    model.addAttribute("hotelReservationIds", hotelReservationIds);
     Iterable<Hotel> hotels = hotelService.getAllHotelReservationsByEmailList(user.getEmail());
     model.addAttribute("hotels", hotels);
 
@@ -93,11 +94,24 @@ public class WelcomeController {
     return "welcome";
   }
 
-  @PostMapping(value = "/new/hotel")
-  public String createHotelReservation(Model model) {
+  @PostMapping(value = "/hotel/new")
+  public String createHotelReservation(
+      @RequestParam("hotelid") int hotelid,
+      @RequestParam("checkinmonth") String checkinmonth,
+      @RequestParam("checkinday") String checkinday,
+      @RequestParam("checkinyear") String checkinyear,
+      @RequestParam("checkoutmonth") String checkoutmonth,
+      @RequestParam("checkoutday") String checkoutday,
+      @RequestParam("checkoutyear") String checkoutyear,
+      @RequestParam("roomtype") String roomtype,
+      @RequestParam("numrooms") int numrooms,
+      Model model) {
+
+    hotelService.newReservation(hotelid, user.getFname(), user.getLname(), user.getEmail(), checkinmonth,
+        checkinday,
+        checkinyear, checkoutmonth, checkoutday, checkoutyear, roomtype, numrooms);
 
     System.out.println(user.getEmail());
-    System.out.println(hotelService.getAllHotelReservationsByEmail(user.getEmail()));
 
     return "welcome";
   }
