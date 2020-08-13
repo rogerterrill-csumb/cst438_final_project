@@ -127,12 +127,85 @@
       </table>
     </form>
   </div>
+
+<!--  HOTEL RESERVATIONS-->
   <div>
-    <form action="#" method="post" th:action="@{/hotel/cancel}">
+    <form action="#" method="post" th:action="@{/hotel/new}">
       <table>
         <tr>
           <h2>Hotel Reservation</h2>
         </tr>
+        <tr>
+          <td>
+            <label>Hotel Type</label>
+          </td>
+          <td>
+            <select name="hotelid">
+              <option value=1>Monterey-Hyatt Regency Monterey Hotel & Spa</option>
+              <option value=2>Monterey-The Monterey Hotel</option>
+              <option value=3>Monterey-Casa Munras Garden Hotel & Spa</option>
+              <option value=4>San Diego-Omni San Diego Hotel</option>
+              <option value=5>San Diego-Westgate Hotel</option>
+              <option value=6>San Diego-Rancho Bernardo Inn San Diego</option>
+              <option value=7>Honolulu-Gaia Hawaii at Trump Waikiki Hotel</option>
+              <option value=8>Honolulu-Lotus Honolulu at Diamond Head</option>
+              <option value=9>Honolulu-Outrigger Waikiki Beach Resort</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Check In Date</label>
+          </td>
+          <td>
+            <input type="number" name="checkinmonth" min="1" max="12" placeholder="Month">
+            <input type="number" name="checkinday" min="1" max="21" placeholder="Day">
+            <input type="number" name="checkinyear" min="2020" max="2050" placeholder="Year">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Check Out Date</label>
+          </td>
+          <td>
+            <input type="number" name="checkoutmonth" min="1" max="12" placeholder="Month">
+            <input type="number" name="checkoutday" min="1" max="21" placeholder="Day">
+            <input type="number" name="checkoutyear" min="2020" max="2050" placeholder="Year">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Room Type</label>
+          </td>
+          <td>
+            <select name="roomtype">
+              <option value="Standard">Standard</option>
+              <option value="Intermediate">Intermediate</option>
+              <option value="Luxury">Luxury</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Number of Rooms</label>
+          </td>
+          <td>
+            <input type="number" name="numrooms" min="1" max="6" placeholder="Number of Rooms">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div>
+              <button type="submit">Submit</button>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <div>
+    <form action="#" method="post" th:action="@{/hotel/cancel}">
+      <table>
         <tr>
           <td>
             <label>Cancel Reservation</label>

@@ -75,6 +75,7 @@ public class HotelService {
             current.get("totalPrice").floatValue()));
       }
     } catch (HttpStatusCodeException ex) {
+      System.out.println("Get By Email Failed");
       System.out.println(ex.getStatusCode());
       hotels.add(new Hotel(0, "-", "-", "-", 0, 0));
     }
@@ -126,17 +127,32 @@ public class HotelService {
     }
   }
 
-  public void newReservation(int hotelid, String fname, String lname, String email,
+  public void newReservation(
+      int hotelid,
+      String fname,
+      String lname,
+      String email,
       String checkinmonth,
-      String checkinday, String checkinyear, String checkoutmonth, String checkoutday,
-      String checkoutyear, String roomtype, int numrooms) {
+      String checkinday,
+      String checkinyear,
+      String checkoutmonth,
+      String checkoutday,
+      String checkoutyear,
+      String roomtype,
+      int numrooms) {
     try {
       ResponseEntity<String> response = restTemplate.getForEntity(
-          this.hotelBaseUrl + "/" + hotelid + "/" + fname + "/" + lname + "/" + email + "/"
+          this.hotelBaseUrl + "/api/hotelReservation/createReservation/" + hotelid + "/" + fname +
+              "/" + lname + "/" + email + "/"
               + checkinmonth + "/" + checkinday + "/" + checkinyear + "/" + checkoutmonth + "/"
               + checkoutday + "/" + checkoutyear + "/" + roomtype + "/" + numrooms, String.class);
     } catch (HttpStatusCodeException ex) {
+      System.out.println("New Reservation Failed");
       System.out.println(ex.getStatusCode());
+      System.out.println(this.hotelBaseUrl + "/api/hotelReservation/createReservation/" + hotelid + "/" + fname +
+          "/" + lname + "/" + email + "/"
+          + checkinmonth + "/" + checkinday + "/" + checkinyear + "/" + checkoutmonth + "/"
+          + checkoutday + "/" + checkoutyear + "/" + roomtype + "/" + numrooms);
     }
   }
 }
