@@ -2,24 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Reservations</title>
-  <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-  <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-  <link rel="stylesheet" href="style.css"/>
+  <link href="css/styles.css" rel="stylesheet">
+  <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/slate/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-G9YbB4o4U6WS4wCthMOpAeweY4gQJyyx0P3nZbEBHyz+AtNoeasfRChmek1C2iqV" crossorigin="anonymous">
 </head>
 <body>
+
+<main> 
 <div th:insert="fragments/nav :: nav"></div>
 <div class="container">
-  <h2>Welcome to the Reservation Website!</h2>
-  <p><span style="color:blue" th:text="${msg}"></span></p>
+  <h1 class="display-3">Welcome to the Reservation Website!</h1>
+  <p><span style="color:white" th:text="${msg}"></span></p>
 
 
-  <div>
+<div class="jumbotron">
     <form action="#" method="post" th:action="@{/new/car}" th:object="${car}">
       <table>
         <tr>
-          <h2>Car Reservation</h2>
+          <h2 class="display-4">Car Reservation</h2>
         </tr>
         <tr>
           <td>
@@ -83,40 +83,37 @@
         <tr>
           <td>
             <div>
-              <button type="submit">Submit</button>
+              <button type="submit" class="btn btn-success">Submit</button> <br>
             </div>
           </td>
         </tr>
       </table>
     </form>
-  </div>
 <!--  Cancel Car RESERVATIONS-->
-   <div>
+   
         <form action="#" method="POST" th:action="@{/cancel/car}" th:object="${carId}">
            <Label>Cancel Car Reservation</Label>
-           <input type="text" name=carId placeholder="Please enter an ID">
-           <button type="submit">Cancel Reservation</button>
+           <input type="text" name=carId placeholder="Please enter an ID"> <br>
+           <button type="submit" class="btn btn-danger">Cancel Reservation</button> <br>
         </form>
-     </div>
   <br>
 <!--  GET Car RESERVATIONS-->
-   <div>
         <form action="#" method="GET" th:action="@{/details/car}">
            <Label>Get Reservation ID</Label>
-
-           <button type="submit">Get Car Details</button>
+			<br>
+           <button type="submit" class="btn btn-info">Get Car Details</button> 
+           
         </form>
         <p><span style="color:blue" th:text="${carID}"></span></p><br>
-     </div>
-  </div>  <br>
+  </div>
 
 <!--  HOTEL RESERVATIONS-->
-<div class="container">
+<div class="jumbotron">
   <div >
     <form action="#" method="post" th:action="@{/hotel/new}">
       <table>
         <tr>
-          <h2>Hotel Reservation</h2>
+          <h2 class="display-4">Hotel Reservation</h2>
         </tr>
         <tr>
           <td>
@@ -179,7 +176,7 @@
         <tr>
           <td>
             <div>
-              <button type="submit">Submit</button>
+              <button type="submit" class="btn btn-success">Submit</button>
             </div>
           </td>
         </tr>
@@ -191,14 +188,14 @@
       <table>
         <tr>
           <td>
-            <label>Cancel Reservation</label>
+            <label>Cancel Reservation</label> </br>
             Enter Id of Hotel Reservation: <input type="text" th:name="id"/>
           </td>
         </tr>
         <tr>
           <td>
             <div>
-              <button type="submit">Submit</button>
+              <button type="submit" class="btn btn-danger">Cancel Reservation</button> <br>
             </div>
           </td>
         </tr>
@@ -233,7 +230,7 @@
         <tr>
           <td>
             <div>
-              <button type="submit">Submit</button>
+              <button type="submit" class="btn btn-info">Get Hotel Details</button> <br>
             </div>
           </td>
         </tr>
@@ -243,11 +240,11 @@
 </div>
 
 <!--  FLIGHT RESERVATIONS-->
-  <div class="container">
+<div class="jumbotron">
     <form action="#" method="post" th:action="@{/flight/new}">
       <table>
         <tr>
-          <h2>Flight Reservation - Under Construction</h2>
+          <h2 class="display-4">Flight Reservation - Under Construction</h2>
         </tr>
         <tr>
           <td>
@@ -297,14 +294,12 @@
         <tr>
           <td>
             <div>
-              <button type="submit">Submit</button>
+              <button type="submit" class="btn btn-success">Submit</button> <br>
             </div>
           </td>
         </tr>
       </table>
     </form>
-  </div>
-  <div>
     <form action="#" method="post" th:action="@{/welcome}">
       <table>
         <tr>
@@ -316,13 +311,14 @@
         <tr>
           <td>
             <div>
-              <button type="submit">Submit</button>
+              <button type="submit" class="btn btn-danger">Cancel Reservation</button> <br>
             </div>
           </td>	
         </tr>
       </table>
     </form>
-  </div>
-</div>
+	</div>
+	
+</main>
 </body>
 </html>
