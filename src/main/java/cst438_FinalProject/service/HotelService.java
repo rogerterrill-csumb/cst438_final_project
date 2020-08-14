@@ -35,22 +35,34 @@ public class HotelService {
     this.hotelBaseUrl = hotelBaseUrl;
   }
 
-  public boolean getAllHotelReservations() {
+  public List<Hotel> getAllHotelReservations() {
+    JsonNode current;
+
+    List<Hotel> hotels = new ArrayList<>();
+
     try {
       ResponseEntity<JsonNode> response = restTemplate.getForEntity(this.hotelBaseUrl
               + "/api/hotelReservation/getAllReservations",
           JsonNode.class);
       JsonNode json = response.getBody();
-      log.info("Status code form hotel reservation server: " + response.getStatusCodeValue());
-      System.out.println(response);
-      Iterator jsonIt = response.getBody().iterator();
-      while (jsonIt.hasNext()) {
-        System.out.println(jsonIt.next().equals("hotel"));
+      Iterator<JsonNode> iterableJson = json.iterator();
+      while (iterableJson.hasNext()) {
+        current = iterableJson.next();
+
+        hotels.add(new Hotel(
+            current.get("resID").asInt(),
+            current.get("hotelName").asText(),
+            current.get("checkIn").asText(),
+            current.get("checkOut").asText(),
+            current.get("totalRooms").asInt(),
+            current.get("totalPrice").floatValue()));
       }
     } catch (HttpStatusCodeException ex) {
+      System.out.println("Get By Email Failed");
       System.out.println(ex.getStatusCode());
+      hotels.add(new Hotel(0, "-", "-", "-", 0, 0));
     }
-    return true;
+    return hotels;
   }
 
   public List<Hotel> getAllHotelReservationsByEmailList(String email) {
@@ -78,20 +90,39 @@ public class HotelService {
       System.out.println("Get By Email Failed");
       System.out.println(ex.getStatusCode());
       hotels.add(new Hotel(0, "-", "-", "-", 0, 0));
+      return null;
     }
     return hotels;
   }
 
-  public void getAllHotelReservationsByCustomerId(int id) {
+  public List<Hotel> getAllHotelReservationsByCustomerId(int id) {
+    JsonNode current;
+
+    List<Hotel> hotels = new ArrayList<>();
     try {
       ResponseEntity<JsonNode> response = restTemplate.getForEntity(this.hotelBaseUrl
               + "/api/hotelReservation/customerID/" + id,
           JsonNode.class);
       JsonNode json = response.getBody();
-      System.out.println(json);
+      Iterator<JsonNode> iterableJson = json.iterator();
+      while (iterableJson.hasNext()) {
+        current = iterableJson.next();
+
+        hotels.add(new Hotel(
+            current.get("resID").asInt(),
+            current.get("hotelName").asText(),
+            current.get("checkIn").asText(),
+            current.get("checkOut").asText(),
+            current.get("totalRooms").asInt(),
+            current.get("totalPrice").floatValue()));
+      }
     } catch (HttpStatusCodeException ex) {
+      System.out.println("Get By Email Failed");
       System.out.println(ex.getStatusCode());
+      hotels.add(new Hotel(0, "-", "-", "-", 0, 0));
+      return null;
     }
+    return hotels;
   }
 
   public Hotel getHotelReservationByReservationId(int id) {
@@ -115,20 +146,22 @@ public class HotelService {
     }
   }
 
-  public void cancelReservationByReservationId(int id) {
+  public boolean cancelReservationByReservationId(int id) {
     try {
       ResponseEntity<String> response = restTemplate.postForEntity(this.hotelBaseUrl
               + "/api/hotelReservation/cancelByReservationID/" + id, null,
           String.class);
       String message = response.getBody();
       System.out.println(message);
+      return true;
     } catch (HttpStatusCodeException ex) {
       System.out.println(this.hotelBaseUrl + "/api/hotelReservation/cancelByReservationID/" + id);
       System.out.println(ex.getStatusCode());
+      return false;
     }
   }
 
-  public void newReservation(
+  public boolean newReservation(
       int hotelid,
       String fname,
       String lname,
@@ -150,10 +183,13 @@ public class HotelService {
     } catch (HttpStatusCodeException ex) {
       System.out.println("New Reservation Failed");
       System.out.println(ex.getStatusCode());
-      System.out.println(this.hotelBaseUrl + "/api/hotelReservation/createReservation/" + hotelid + "/" + fname +
-          "/" + lname + "/" + email + "/"
-          + checkinmonth + "/" + checkinday + "/" + checkinyear + "/" + checkoutmonth + "/"
-          + checkoutday + "/" + checkoutyear + "/" + roomtype + "/" + numrooms);
+      System.out.println(
+          this.hotelBaseUrl + "/api/hotelReservation/createReservation/" + hotelid + "/" + fname +
+              "/" + lname + "/" + email + "/"
+              + checkinmonth + "/" + checkinday + "/" + checkinyear + "/" + checkoutmonth + "/"
+              + checkoutday + "/" + checkoutyear + "/" + roomtype + "/" + numrooms);
+      return false;
     }
+    return true;
   }
 }
