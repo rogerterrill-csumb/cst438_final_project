@@ -6,18 +6,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 public class Flight {
-	
+
 	//@Id
 	//@GeneratedValue
 	//private long id;
+
 	private String email;
 	private String seatClass;
 	private int numPassengers;
 	private boolean prioBoarding; 
 	private int flightID;
-	
-	
-	
+
+
+
 	public Flight() {}
 
 	public Flight(String email, String seatClass, 
@@ -118,6 +119,4 @@ public class Flight {
 			return false;
 		return true;
 	}
-
-	
 }

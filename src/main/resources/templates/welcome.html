@@ -75,7 +75,7 @@
                 <option value="SUV">SUV</option>
                 <option value="Fullsize">Full Size</option>
                 <option value="Economy">Economy</option>
-                <option value="Compact">Economy</option>
+                <option value="Compact">Compact</option>
               </select>
             </div>
           </td>
@@ -236,6 +236,89 @@
               <button type="submit">Submit</button>
             </div>
           </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</div>
+
+<!--  FLIGHT RESERVATIONS-->
+  <div class="container">
+    <form action="#" method="post" th:action="@{/flight/new}">
+      <table>
+        <tr>
+          <h2>Flight Reservation - Under Construction</h2>
+        </tr>
+        <tr>
+          <td>
+            <label>Flight Type</label>
+          </td>
+          <td>
+            <select name="flightID">
+              <option value=1>Honolulu to Monterey</option>
+              <option value=2>Honolulu to San Diego</option>
+              <option value=5>San Diego to Honolulu</option>
+              <option value=6>San Diego to Monterey</option>
+              <option value=11>Monterey to San Diego</option>
+              <option value=12>Monterey to Honolulu</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Flight Date (Only September 1st 2020 available)</label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Return Date (Only September 1st 2020 available)</label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Flight Type</label>
+          </td>
+          <td>
+            <select name="seatClass">
+              <option value="economy">Economy</option>
+              <option value="business">Business</option>
+              <option value="first">First</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Number of Passengers</label>
+          </td>
+          <td>
+            <input type="number" name="numPassengers" min="1" max="10" placeholder="Total">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div>
+              <button type="submit">Submit</button>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <div>
+    <form action="#" method="post" th:action="@{/welcome}">
+      <table>
+        <tr>
+          <td>
+            <label>Cancel Flight - Under Construction</label>
+            Enter Id of Flight Reservation: <input type="text" th:name="flightID"/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div>
+              <button type="submit">Submit</button>
+            </div>
+          </td>	
         </tr>
       </table>
     </form>
