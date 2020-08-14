@@ -14,6 +14,7 @@
   <h2>Welcome to the Reservation Website!</h2>
   <p><span style="color:blue" th:text="${msg}"></span></p>
 
+
   <div>
     <form action="#" method="post" th:action="@{/new/car}" th:object="${car}">
       <table>
@@ -89,7 +90,6 @@
       </table>
     </form>
   </div>
-  
 <!--  Cancel Car RESERVATIONS-->
    <div>
         <form action="#" method="POST" th:action="@{/cancel/car}" th:object="${carId}">
@@ -99,8 +99,20 @@
         </form>
      </div>
   </div> <br>
+<!--  GET Car RESERVATIONS-->
+   <div>
+        <form action="#" method="GET" th:action="@{/details/car}">
+           <Label>Get Reservation ID</Label>
+
+           <button type="submit">Get Car Details</button>
+        </form>
+        <p><span style="color:blue" th:text="${carID}"></span></p><br>
+     </div>
+  </div>  <br>
+  
 <!--  HOTEL RESERVATIONS-->
-  <div>
+<div class="container">
+  <div >
     <form action="#" method="post" th:action="@{/hotel/new}">
       <table>
         <tr>
@@ -228,6 +240,9 @@
       </table>
     </form>
   </div>
+</div>
+</body>
+</html>
   
 <!--  FLIGHT RESERVATIONS-->
   <div>
